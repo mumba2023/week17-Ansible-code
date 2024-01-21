@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  tasks :
+    - name: Check the time
+      command: date
+    - name: create user charles
+      user:
+        name: charles2023
+        comment: charles Admin
+    - name: create group
+      group:
+        name: security
+        state: present
+    - name: install package
+      package:
+        name: curl
+        state: present
