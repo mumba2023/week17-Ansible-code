@@ -2,18 +2,25 @@
 - hosts: all
   become: true
   gather_facts: yes
+  ignore_errors: true
+  vars:
+    user_name: charles
+    group_name: devops
+  vars_files:
+    - variable.yml 
   tasks :
     - name: Check the time
-      command: date
+      command: datehodigm3049
+    #  when: ansible_distribution == "serge" or ansible_processor_nproc == 2
     - name: create user charles
       user:
-        name: charles2023
+        name: "{{user_name}}"
         comment: charles Admin
     - name: create group
       group:
-        name: security
+        name: "{{group_name}}"
         state: present
     - name: install package
       package:
-        name: curl
+        name: "{{pkg_name}}"
         state: present

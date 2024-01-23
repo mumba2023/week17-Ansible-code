@@ -1,0 +1,45 @@
+---
+- name: Install Apache
+  hosts: databaseservers
+  become: yes
+  ignore_errors: false
+  gather_facts: true
+
+  tasks:
+    - name: Update the system
+      yum:
+        name: '*'
+        state: latest
+      tags:
+        - update
+    - name: Install httpd
+      package:
+        name: httpd
+        state: present
+      tags:
+        - install
+
+    - name: Start the httpd
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+      tags:
+        - deamon
+
+    - name: Copy index file to target
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+      tags:
+        - file_copy
+
+
+
+# yum update -y
+# yum install httpd -y
+# systemctl start httpd
+# systemctl enable httpd
+# cd /var/www/html
+# touch index.html
+# vi
