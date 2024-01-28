@@ -1,7 +1,7 @@
 ---
 - name: Install Apache
   hosts: databaseservers
-  become: yes
+  become: true
   ignore_errors: false
   gather_facts: true
 
@@ -23,7 +23,7 @@
       systemd:
         name: httpd
         state: started
-        enabled: yes
+        enabled: true
       tags:
         - deamon
 

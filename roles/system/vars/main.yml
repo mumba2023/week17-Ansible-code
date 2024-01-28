@@ -1,0 +1,6 @@
+---
+# vars/main.yml for the 'system' role
+
+system_variables:
+  
+pkg: ('*')
